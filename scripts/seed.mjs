@@ -10,8 +10,8 @@
  * Reads NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET,
  * and NEXT_PUBLIC_SANITY_API_VERSION from .env.local.
  *
- * Usage (npm script handles the --env-file flag):
- *   npm run seed
+ * Usage (the pnpm script handles the --env-file flag):
+ *   pnpm seed
  */
 
 import { createClient } from '@sanity/client';
@@ -143,7 +143,7 @@ async function main() {
   for (const r of result.results) {
     console.log(`  - ${r.id}`);
   }
-  console.log('\nVisit /studio to edit, or just run `npm run dev` and open /');
+  console.log('\nVisit /studio to edit, or just run `pnpm dev` and open /');
 }
 
 main().catch((err) => {

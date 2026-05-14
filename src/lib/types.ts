@@ -1,7 +1,12 @@
 /**
- * These are hand-written types to get started.
- * Replace with auto-generated types by running: pnpm sanity:types
- * That produces src/sanity/types.ts which you should import from instead.
+ * Hand-written types for the schemas this template ships with. These are
+ * the source of truth until a downstream project diverges its schema —
+ * at that point run `pnpm sanity:types` to generate `src/sanity/types.ts`
+ * from the live schema and migrate imports to that file.
+ *
+ * The template can't ship a generated types file because `sanity schema
+ * extract` requires a real project ID, which only exists after
+ * `pnpm new-project`.
  */
 
 import type { PortableTextBlock } from '@portabletext/types';

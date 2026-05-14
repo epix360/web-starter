@@ -90,7 +90,7 @@ scripts/new-project.sh         Provisioning automation
 - **Routes are CMS-driven.** New marketing pages are created in Sanity, not as new files in `app/`. The `[[...slug]]` route renders any page document.
 - **Sections are blocks.** To add a new page section type: create a schema in `src/sanity/schemas/objects/blocks/`, register it in `schemas/index.ts` and the `page` schema's `sections` array, then create a renderer in `src/components/blocks/` and wire it into `Sections.tsx`.
 - **Cache tags = document type + slug.** The revalidate webhook invalidates `post`, `post:my-slug`, etc. Use these in your `sanityFetch` calls.
-- **Types are generated.** Run `pnpm sanity:types` to regenerate `src/sanity/types.ts` from your schemas. The hand-written types in `src/lib/types.ts` are starter scaffolding.
+- **Types.** `src/lib/types.ts` covers the schemas the template ships with. Run `pnpm sanity:types` once you diverge your own schema to generate `src/sanity/types.ts` from your live project, then switch imports over — the generated file is gitignored so each project owns its own.
 - **Env vars are managed in Vercel.** Use `vercel env pull .env.local` to sync.
 
 ## Versioning

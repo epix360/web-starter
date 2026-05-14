@@ -11,3 +11,4 @@ dist
 src/sanity/types.ts
 src/sanity/extract.json
 tsconfig.tsbuildinfo
+package-lock.json
