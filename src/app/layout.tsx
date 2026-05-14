@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${fontSans.variable} ${fontDisplay.variable} ${fontMono.variable}`}
     >
-      <head>
+      <body className="font-sans" suppressHydrationWarning>
         {plausibleDomain && (
           <Script
             defer
@@ -48,8 +48,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy="afterInteractive"
           />
         )}
-      </head>
-      <body className="font-sans">{children}</body>
+        {children}
+      </body>
     </html>
   );
 }
