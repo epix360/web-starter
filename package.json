@@ -15,7 +15,9 @@
   },
   "dependencies": {
     "@portabletext/react": "^3.1.0",
+    "@portabletext/types": "^2.0.13",
     "@sanity/image-url": "^1.0.2",
+    "@tailwindcss/typography": "^0.5.15",
     "@sanity/vision": "^3.57.0",
     "next": "^15.0.0",
     "next-sanity": "^9.5.0",
