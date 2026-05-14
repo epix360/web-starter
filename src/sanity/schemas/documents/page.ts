@@ -24,6 +24,10 @@ export const page = defineType({
         { type: 'hero' },
         { type: 'richText' },
         { type: 'cta' },
+        { type: 'featureGrid' },
+        { type: 'logoCloud' },
+        { type: 'testimonial' },
+        { type: 'faq' },
       ],
     }),
     defineField({

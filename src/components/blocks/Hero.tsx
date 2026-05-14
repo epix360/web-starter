@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { urlForImage } from '@/sanity/image';
+import { SanityImage } from '@/components/SanityImage';
 import { resolveLink } from '@/lib/seo';
 import type { HeroBlock } from '@/lib/types';
 
@@ -15,7 +15,7 @@ export function Hero({ block }: { block: HeroBlock }) {
           )}
           <h1 className="font-display text-4xl md:text-5xl">{block.heading}</h1>
           {block.subheading && (
-            <p className="mt-6 text-lg text-neutral-700">{block.subheading}</p>
+            <p className="mt-6 text-lg text-text-muted">{block.subheading}</p>
           )}
           {block.ctas && block.ctas.length > 0 && (
             <div className="mt-8 flex flex-wrap gap-3">
@@ -39,11 +39,13 @@ export function Hero({ block }: { block: HeroBlock }) {
         </div>
         {block.image?.asset && (
           <div className="overflow-hidden rounded-xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={urlForImage(block.image).width(1200).url()}
+            <SanityImage
+              image={block.image}
               alt={block.image.alt || ''}
-              className="w-full"
+              width={1200}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              priority
+              className="h-auto w-full"
             />
           </div>
         )}

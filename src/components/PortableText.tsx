@@ -1,18 +1,22 @@
 import Link from 'next/link';
 import type { PortableTextComponents } from '@portabletext/react';
-import { urlForImage } from '@/sanity/image';
+import { SanityImage } from '@/components/SanityImage';
 
 export const portableTextComponents: PortableTextComponents = {
   types: {
     image: ({ value }) => {
       if (!value?.asset) return null;
-      const src = urlForImage(value).width(1200).url();
       return (
         <figure className="my-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={value.alt || ''} className="rounded-lg" />
+          <SanityImage
+            image={value}
+            alt={value.alt || ''}
+            width={1200}
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="h-auto w-full rounded-lg"
+          />
           {value.caption && (
-            <figcaption className="mt-2 text-sm text-neutral-600">{value.caption}</figcaption>
+            <figcaption className="mt-2 text-sm text-text-muted">{value.caption}</figcaption>
           )}
         </figure>
       );

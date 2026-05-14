@@ -6,6 +6,18 @@
 
 import type { PortableTextBlock } from '@portabletext/types';
 
+export type SanityImage = {
+  alt?: string;
+  asset: {
+    _ref?: string;
+    _id?: string;
+    metadata?: {
+      dimensions?: { width: number; height: number; aspectRatio: number };
+      lqip?: string;
+    };
+  };
+};
+
 export type Link = {
   label: string;
   linkType: 'internal' | 'external';
@@ -38,7 +50,7 @@ export type HeroBlock = {
   eyebrow?: string;
   heading: string;
   subheading?: string;
-  image?: { asset: { _ref: string }; alt?: string };
+  image?: SanityImage;
   ctas?: Link[];
 };
 
@@ -56,7 +68,60 @@ export type CtaBlock = {
   link?: Link;
 };
 
-export type Section = HeroBlock | RichTextBlock | CtaBlock;
+export type FeatureGridBlock = {
+  _type: 'featureGrid';
+  _key: string;
+  eyebrow?: string;
+  heading?: string;
+  subheading?: string;
+  features?: {
+    _key: string;
+    title: string;
+    body?: string;
+    icon?: string;
+  }[];
+};
+
+export type LogoCloudBlock = {
+  _type: 'logoCloud';
+  _key: string;
+  heading?: string;
+  logos?: {
+    _key: string;
+    name: string;
+    image?: SanityImage;
+    url?: string;
+  }[];
+};
+
+export type TestimonialBlock = {
+  _type: 'testimonial';
+  _key: string;
+  quote: string;
+  authorName?: string;
+  authorTitle?: string;
+  authorImage?: SanityImage;
+};
+
+export type FaqBlock = {
+  _type: 'faq';
+  _key: string;
+  heading?: string;
+  items?: {
+    _key: string;
+    question: string;
+    answer: PortableTextBlock[];
+  }[];
+};
+
+export type Section =
+  | HeroBlock
+  | RichTextBlock
+  | CtaBlock
+  | FeatureGridBlock
+  | LogoCloudBlock
+  | TestimonialBlock
+  | FaqBlock;
 
 export type Page = {
   _id: string;
@@ -72,7 +137,7 @@ export type PostListItem = {
   slug: string;
   excerpt?: string;
   publishedAt: string;
-  coverImage?: string;
+  coverImage?: SanityImage;
   author?: { name: string; slug?: string };
 };
 
@@ -82,9 +147,9 @@ export type Post = {
   slug: string;
   excerpt?: string;
   publishedAt: string;
-  coverImage?: { asset: { _ref: string }; alt?: string };
+  coverImage?: SanityImage;
   body?: PortableTextBlock[];
-  author?: { name: string; slug?: string; bio?: string; image?: { asset: { _ref: string } } };
+  author?: { name: string; slug?: string; bio?: string; image?: SanityImage };
   categories?: { title: string; slug: string }[];
   seo?: SeoFields;
 };

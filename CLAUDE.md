@@ -11,6 +11,7 @@ npm run lint         # ESLint via next lint
 npm run typecheck    # tsc --noEmit (no emit, type errors only)
 npm run format       # Prettier over all files
 npm run sanity:types # regenerate src/sanity/types.ts from schemas
+npm run seed         # seed Sanity with siteSettings + a home page (needs SANITY_API_WRITE_TOKEN)
 npm run new-project  # provisioning script (Sanity + Vercel + env vars)
 ```
 

@@ -6,6 +6,7 @@ import { client } from '@/sanity/client';
 import { postBySlugQuery, allPostSlugsQuery, siteSettingsQuery } from '@/sanity/queries';
 import { buildMetadata } from '@/lib/seo';
 import { portableTextComponents } from '@/components/PortableText';
+import { SanityImage } from '@/components/SanityImage';
 import type { Post, SiteSettings } from '@/lib/types';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -53,12 +54,23 @@ export default async function PostRoute({ params }: Props) {
     <article className="container max-w-3xl py-16">
       <header className="mb-10">
         <h1 className="font-display text-4xl">{post.title}</h1>
-        <div className="mt-4 flex items-center gap-3 text-sm text-neutral-600">
+        <div className="mt-4 flex items-center gap-3 text-sm text-text-muted">
           {post.author && <span>{post.author.name}</span>}
           <time dateTime={post.publishedAt}>
             {new Date(post.publishedAt).toLocaleDateString()}
           </time>
         </div>
+        {post.coverImage?.asset && (
+          <div className="mt-8 overflow-hidden rounded-xl">
+            <SanityImage
+              image={post.coverImage}
+              width={1200}
+              sizes="(min-width: 768px) 768px, 100vw"
+              priority
+              className="h-auto w-full"
+            />
+          </div>
+        )}
       </header>
       <div className="prose prose-neutral max-w-none">
         {post.body && <PortableText value={post.body} components={portableTextComponents} />}

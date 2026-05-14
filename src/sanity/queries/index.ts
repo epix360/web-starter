@@ -10,6 +10,17 @@ const linkFields = groq`
   external
 `;
 
+// Image fragment — keeps the full asset ref + dimensions + LQIP placeholder
+// so SanityImage can hand correct width/height + blur data to next/image.
+const imageFields = groq`
+  ...,
+  asset->{
+    _id,
+    _ref,
+    metadata { dimensions { width, height, aspectRatio }, lqip }
+  }
+`;
+
 const seoFields = groq`
   seo {
     title,
@@ -43,13 +54,38 @@ export const pageBySlugQuery = groq`
       eyebrow,
       heading,
       subheading,
-      image,
+      image{ ${imageFields} },
       ctas[]{ ${linkFields} },
       // richText
       content,
       // cta
       body,
-      link{ ${linkFields} }
+      link{ ${linkFields} },
+      // featureGrid
+      features[]{
+        _key,
+        title,
+        body,
+        icon
+      },
+      // logoCloud
+      logos[]{
+        _key,
+        name,
+        image{ ${imageFields} },
+        url
+      },
+      // testimonial
+      quote,
+      authorName,
+      authorTitle,
+      authorImage{ ${imageFields} },
+      // faq
+      items[]{
+        _key,
+        question,
+        answer
+      }
     },
     ${seoFields}
   }
@@ -66,7 +102,7 @@ export const allPostsQuery = groq`
     "slug": slug.current,
     excerpt,
     publishedAt,
-    "coverImage": coverImage.asset->url,
+    coverImage{ ${imageFields} },
     "author": author->{ name, "slug": slug.current }
   }
 `;
@@ -78,7 +114,7 @@ export const postBySlugQuery = groq`
     "slug": slug.current,
     excerpt,
     publishedAt,
-    coverImage,
+    coverImage{ ${imageFields} },
     body,
     "author": author->{ name, "slug": slug.current, bio, image },
     "categories": categories[]->{ title, "slug": slug.current },

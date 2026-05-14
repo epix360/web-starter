@@ -9,7 +9,10 @@ import { blockContent } from './objects/blockContent';
 import { hero } from './objects/blocks/hero';
 import { richText } from './objects/blocks/richText';
 import { cta } from './objects/blocks/cta';
-
+import { featureGrid } from './objects/blocks/featureGrid';
+import { logoCloud } from './objects/blocks/logoCloud';
+import { testimonial } from './objects/blocks/testimonial';
+import { faq } from './objects/blocks/faq';
 
 export const schemaTypes = [
   // Documents
@@ -26,4 +29,8 @@ export const schemaTypes = [
   hero,
   richText,
   cta,
+  featureGrid,
+  logoCloud,
+  testimonial,
+  faq,
 ];

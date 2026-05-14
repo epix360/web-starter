@@ -6,6 +6,21 @@ upgrades are deliberate.
 
 ## [Unreleased]
 
+### Added
+- Four new page-builder blocks: `featureGrid`, `logoCloud`, `testimonial`, `faq`
+- `SanityImage` component wrapping `next/image` with asset metadata (dimensions + LQIP blur)
+- `npm run seed` script that writes a `siteSettings` singleton and a `home` page so a fresh dataset renders something at `/` immediately
+- Full brand color scale (50–950) plus accent / semantic surface + text tokens
+- `not-found.tsx`, `error.tsx`, `loading.tsx` under `(site)/` plus a root `global-error.tsx`
+
+### Changed
+- `<img>` replaced with `SanityImage` in Hero, blog index, blog post header, and PortableText image renderer
+- GROQ image fragments now request `asset->metadata { dimensions, lqip }` so next/image gets correct width/height + blur placeholder
+- `Sections.tsx` warns in dev when a block `_type` has no registered renderer
+- `@tailwindcss/typography` plugin enabled (prose styles in blog posts now render)
+- Stega disabled in the published Sanity client; production HTML no longer contains Visual Editing source markers
+- Custom fonts loaded via `next/font` (Inter / Playfair Display / JetBrains Mono) and bound to the `--font-*` CSS variables Tailwind expects
+
 ## [0.1.0] - Initial release
 
 ### Added

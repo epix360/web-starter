@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { sanityFetch } from '@/sanity/fetch';
 import { allPostsQuery } from '@/sanity/queries';
+import { SanityImage } from '@/components/SanityImage';
 import type { PostListItem } from '@/lib/types';
 
 export const metadata = { title: 'Blog' };
@@ -18,12 +19,14 @@ export default async function BlogIndex() {
         {posts.map((post) => (
           <li key={post._id}>
             <Link href={`/blog/${post.slug}`} className="group block">
-              {post.coverImage && (
+              {post.coverImage?.asset && (
                 <div className="aspect-[3/2] overflow-hidden rounded-lg bg-neutral-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={post.coverImage}
+                  <SanityImage
+                    image={post.coverImage}
                     alt=""
+                    width={600}
+                    height={400}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="h-full w-full object-cover transition group-hover:scale-105"
                   />
                 </div>
