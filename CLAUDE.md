@@ -32,7 +32,9 @@ There are no tests. `typecheck` and `lint` are the verification steps.
 3. Add fields to the relevant GROQ query in `src/sanity/queries/index.ts`
 4. Create renderer in `src/components/blocks/<Name>.tsx` and add a `case` in `Sections.tsx`
 
-**Data fetching.** All Sanity reads go through `sanityFetch` (`src/sanity/fetch.ts`). It is server-only and wraps `client.fetch` with `next.tags` for ISR. In development it always revalidates (`revalidate: 0`). Cache tags follow the convention `<type>` and `<type>:<slug>` (e.g. `['page', 'page:about']`).
+**Data fetching.** All Sanity reads go through `sanityFetch` (`src/sanity/fetch.ts`). It is server-only and switches between the published client and the draft client based on `draftMode()`. The published client uses Next.js cache tags for ISR; the draft client bypasses the cache and emits stega markers. In development it always revalidates (`revalidate: 0`). Cache tags follow the convention `<type>` and `<type>:<slug>` (e.g. `['page', 'page:about']`).
+
+**Preview / draft mode.** Sanity's Presentation tool (configured in `sanity.config.ts`) hits `/api/draft-mode/enable` with a signed secret to flip Next into draft mode. `(site)/layout.tsx` then renders `<VisualEditing />` and a banner with an exit link. Requires `SANITY_API_READ_TOKEN`.
 
 **ISR revalidation.** Sanity webhooks POST to `/api/revalidate`, which calls `revalidateTag()` for the affected document type and slug. The webhook must include `SANITY_REVALIDATE_SECRET` in the request header.
 

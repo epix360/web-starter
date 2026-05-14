@@ -1,9 +1,15 @@
 import 'server-only';
+import { draftMode } from 'next/headers';
 import type { QueryParams } from 'next-sanity';
 import { client } from './client';
+import { draftClient } from './draftClient';
 
 /**
  * Server-only Sanity fetch with Next.js cache tags.
+ *
+ * When Next draft mode is enabled (via /api/draft-mode/enable) this routes
+ * through the draft client: no CDN, drafts perspective, stega on. Otherwise
+ * the published client is used with tag-based ISR.
  *
  * Usage:
  *   const page = await sanityFetch<Page>({
@@ -23,9 +29,13 @@ export async function sanityFetch<T>({
   params?: QueryParams;
   tags?: string[];
 }): Promise<T> {
-  return client.fetch<T>(query, params, {
+  const isDraft = (await draftMode()).isEnabled;
+  const sanityClient = isDraft ? draftClient : client;
+
+  return sanityClient.fetch<T>(query, params, {
     next: {
-      revalidate: process.env.NODE_ENV === 'development' ? 0 : false,
+      revalidate:
+        isDraft || process.env.NODE_ENV === 'development' ? 0 : false,
       tags,
     },
   });

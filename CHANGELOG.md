@@ -7,6 +7,8 @@ upgrades are deliberate.
 ## [Unreleased]
 
 ### Added
+- Sanity Presentation tool wired up: draft/preview mode via `/api/draft-mode/enable` (and `/disable`), draft-mode banner, `<VisualEditing />` overlay in `(site)/layout.tsx`, and a dedicated draft client with stega enabled + drafts perspective
+- Singleton enforcement in Sanity Studio: `siteSettings` hidden from "New document" menu and stripped of duplicate/delete/unpublish actions
 - Four new page-builder blocks: `featureGrid`, `logoCloud`, `testimonial`, `faq`
 - `SanityImage` component wrapping `next/image` with asset metadata (dimensions + LQIP blur)
 - `npm run seed` script that writes a `siteSettings` singleton and a `home` page so a fresh dataset renders something at `/` immediately
