@@ -1,6 +1,6 @@
 # web-starter
 
-Opinionated Next.js starter for the stack: **Next.js 15 + Tailwind + Sanity + Plausible + Vercel**, with optional modules for Supabase, Resend, and Tally.
+Opinionated Next.js starter for the stack: **Next.js 15 + Tailwind + Sanity + Plausible + Vercel**, with optional modules for Supabase, Resend, Tally, and Meilisearch.
 
 ## What's included
 
